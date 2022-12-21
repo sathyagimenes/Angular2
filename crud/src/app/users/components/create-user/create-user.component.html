@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row my-4">
+    <h1 style="text-align: center" class="fs-1 my-5">Cadastro de usuário</h1>
+    <form class="example-form justify-content-center align-items-center d-flex row" [formGroup]="registerForm">
+      <table class="m-1 w-100" cellspacing="0"><tr>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Nome e Sobrenome</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error class="invalid-feedback"
+            *ngIf="registerForm.controls['name'].errors && registerForm.controls['name'].touched">O campo nome deve conter ao menos 3 caracteres</mat-error>
+        </mat-form-field></td>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Profissão</mat-label>
+          <input matInput type="text" formControlName="profession">
+          <mat-error class="invalid-feedback"
+            *ngIf="registerForm.controls['profession'].errors && registerForm.controls['profession'].touched">O campo profissão é obrigatório</mat-error>
+        </mat-form-field></td>
+      </tr></table>
+      <table class="m-1 w-100" cellspacing="0"><tr>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Data de nascimento</mat-label>
+          <input matInput type="date" formControlName="birthDate">
+          <mat-error class="invalid-feedback"
+            *ngIf="registerForm.controls['birthDate'].errors && registerForm.controls['birthDate'].touched">O campo data de nascimento é obrigatório</mat-error>
+        </mat-form-field></td>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>CPF</mat-label>
+          <input matInput type="text" formControlName="documentNumber">
+          <mat-error class="invalid-feedback"
+            *ngIf="registerForm.controls['documentNumber'].errors && registerForm.controls['documentNumber'].touched">O campo CPF deve conter 11 digitos</mat-error>
+        </mat-form-field></td>
+      </tr></table>
+
+      <table class="m-1 w-100" cellspacing="0" formGroupName="address"><tr>
+        <td class="w-75"><mat-form-field class="m-1 w-100">
+          <mat-label>Rua</mat-label>
+          <input matInput placeholder="Ex.  Rua das Laranjeiras" formControlName="street">
+          <mat-error class="invalid-feedback"
+            *ngIf="registerForm.get('address.street')?.errors && registerForm.get('address.street')?.touched">O campo rua é obrigatório</mat-error>
+        </mat-form-field></td>
+        <td td class="w-25"><mat-form-field class="m-1 w-100">
+          <mat-label>Numero</mat-label>
+          <input matInput placeholder="Ex. 400" type="number" formControlName="number">
+          <mat-error class="invalid-feedback"
+          *ngIf="registerForm.get('address.number')?.errors && registerForm.get('address.number')?.touched">O campo numero é obrigatório</mat-error>
+        </mat-form-field></td>
+      </tr></table>
+
+      <table class="m-1 w-100" cellspacing="0" formGroupName="address"><tr>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Bairro</mat-label>
+          <input matInput placeholder="Ex. Morumbi" formControlName="neighborhood">
+          <mat-error class="invalid-feedback"
+          *ngIf="registerForm.get('address.neighborhood')?.errors && registerForm.get('address.neighborhood')?.touched">O campo bairro é obrigatório</mat-error>
+        </mat-form-field></td>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Complemento</mat-label>
+          <input matInput placeholder="Ex. ap.12" formControlName="complement">
+        </mat-form-field></td>
+      </tr></table>
+
+      <table class="m-1 w-100" cellspacing="0" formGroupName="address"><tr>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Cidade</mat-label>
+          <input matInput placeholder="Ex. São Paulo" formControlName="city">
+          <mat-error class="invalid-feedback"
+          *ngIf="registerForm.get('address.city')?.errors && registerForm.get('address.city')?.touched">O campo cidade é obrigatório</mat-error>
+        </mat-form-field></td>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Estado</mat-label>
+          <input matInput placeholder="Ex. SP" formControlName="state">
+          <mat-error class="invalid-feedback"
+          *ngIf="registerForm.get('address.state')?.errors && registerForm.get('address.state')?.touched">O campo Estado é obrigatório</mat-error>
+        </mat-form-field></td>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>CEP</mat-label>
+          <input matInput type="text" placeholder="Ex. 11222333" formControlName="zipCode">
+          <mat-error class="invalid-feedback"
+          *ngIf="registerForm.get('address.zipCode')?.errors && registerForm.get('address.zipCode')?.touched">O campo CEP deve conter 8 digitos</mat-error>
+        </mat-form-field></td>
+      </tr></table>
+
+      <table class="m-1 w-100" cellspacing="0" formGroupName="contact"><tr>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="e-mail" placeholder="Ex. exemplo@email.com" formControlName="email">
+          <mat-error class="invalid-feedback"
+          *ngIf="registerForm.get('contact.email')?.errors && registerForm.get('contact.email')?.touched">O campo e-mail é obrigatório</mat-error>
+        </mat-form-field></td>
+        <td><mat-form-field class="m-1 w-100">
+          <mat-label>Celular</mat-label>
+          <input matInput type="text" formControlName="phone">
+          <mat-error class="invalid-feedback"
+          *ngIf="registerForm.get('contact.phone')?.errors && registerForm.get('contact.phone')?.touched">O campo celular deve conter 11 digitos</mat-error>
+        </mat-form-field></td>
+      </tr></table>
+      <button mat-raised-button color="primary" type="submit" class="w-25 fs-4 my-3 p-4" (click)="onSubmit()" [disabled]="!registerForm.valid">Cadastrar</button>
+    </form>
+  </div>
+</div>
