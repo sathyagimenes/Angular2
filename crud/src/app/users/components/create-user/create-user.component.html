@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row my-4">
     <h1 style="text-align: center" class="fs-1 my-5">Cadastro de usuário</h1>
-    <form class="example-form justify-content-center align-items-center d-flex row" [formGroup]="registerForm">
+    <form class="example-form justify-content-center align-items-center d-flex row" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <table class="m-1 w-100" cellspacing="0"><tr>
         <td><mat-form-field class="m-1 w-100">
           <mat-label>Nome e Sobrenome</mat-label>
@@ -25,7 +25,7 @@
         </mat-form-field></td>
         <td><mat-form-field class="m-1 w-100">
           <mat-label>CPF</mat-label>
-          <input matInput type="text" formControlName="documentNumber">
+          <input matInput type="text" formControlName="documentNumber" mask="000.000.000-00">
           <mat-error class="invalid-feedback"
             *ngIf="registerForm.controls['documentNumber'].errors && registerForm.controls['documentNumber'].touched">O campo CPF deve conter 11 digitos</mat-error>
         </mat-form-field></td>
@@ -68,13 +68,17 @@
         </mat-form-field></td>
         <td><mat-form-field class="m-1 w-100">
           <mat-label>Estado</mat-label>
-          <input matInput placeholder="Ex. SP" formControlName="state">
+          <mat-select name="address.state" formControlName="state">
+            <mat-option *ngFor="let state of states" [value]="state.abbr">{{
+              state.name
+            }}</mat-option>
+          </mat-select>
           <mat-error class="invalid-feedback"
           *ngIf="registerForm.get('address.state')?.errors && registerForm.get('address.state')?.touched">O campo Estado é obrigatório</mat-error>
         </mat-form-field></td>
         <td><mat-form-field class="m-1 w-100">
           <mat-label>CEP</mat-label>
-          <input matInput type="text" placeholder="Ex. 11222333" formControlName="zipCode">
+          <input matInput type="text" placeholder="Ex. 11.222-333" mask="00.000-000" formControlName="zipCode">
           <mat-error class="invalid-feedback"
           *ngIf="registerForm.get('address.zipCode')?.errors && registerForm.get('address.zipCode')?.touched">O campo CEP deve conter 8 digitos</mat-error>
         </mat-form-field></td>
@@ -89,12 +93,12 @@
         </mat-form-field></td>
         <td><mat-form-field class="m-1 w-100">
           <mat-label>Celular</mat-label>
-          <input matInput type="text" formControlName="phone">
+          <input matInput type="text" formControlName="phone" mask="(00) 00000-0000">
           <mat-error class="invalid-feedback"
           *ngIf="registerForm.get('contact.phone')?.errors && registerForm.get('contact.phone')?.touched">O campo celular deve conter 11 digitos</mat-error>
         </mat-form-field></td>
       </tr></table>
-      <button mat-raised-button color="primary" type="submit" class="w-25 fs-4 my-3 p-4" (click)="onSubmit()" [disabled]="!registerForm.valid">Cadastrar</button>
+      <button mat-raised-button color="primary" type="submit" class="w-25 fs-4 my-3 p-4" [disabled]="!registerForm.valid">Cadastrar</button>
     </form>
   </div>
 </div>

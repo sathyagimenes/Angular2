@@ -1,5 +1,9 @@
+import { UsersService } from './../../services/users.service';
+import { User } from './../../models/user.model';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { States } from '../../models/states.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -9,16 +13,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CreateUserComponent {
 
   registerForm!: FormGroup;
+  user!: User;
+  public states!: States[];
+
+  constructor(private usersService: UsersService, private router: Router) {}
 
   ngOnInit() {
+    this.buildForm();
+    this.getStates();
+  }
+
+  private buildForm(): void {
     this.registerForm = new FormGroup({
-      // id: crypto.randomUUID(),
+      id: new FormControl(),
       name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       profession: new FormControl(null, [Validators.required]),
       birthDate: new FormControl(null, [Validators.required]),
       documentNumber: new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('^[0-9]*$')]),
       address: new FormGroup({
-        // id: crypto.randomUUID(),
+        id: new FormControl(),
         zipCode: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[0-9]*$')]),
         street: new FormControl(null, [Validators.required]),
         number: new FormControl(null, [Validators.required]),
@@ -35,10 +48,15 @@ export class CreateUserComponent {
     });
   }
 
+  private getStates(): void {
+    this.states = this.usersService.getStatesOfBrazil();
+  }
+
   public onSubmit() {
-    console.log(this.registerForm);
-    // this.registerForm.reset();
-    // localStorage.setItem('USERS', JSON.stringify(this.registerForm));
+    this.user = this.registerForm.getRawValue();
+    this.usersService.saveUser(this.user);
+    this.registerForm.reset();
+    this.router.navigate(['/users']);
   }
 
 }

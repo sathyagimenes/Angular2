@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { UsersService } from './../../services/users.service';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -6,6 +7,18 @@ import { User } from '../../models/user.model';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent {
-  public users: User[] = JSON.parse(localStorage.getItem('USERS') || '[]');
+export class ListComponent implements OnInit{
+
+  public users!: User[];
+
+  constructor(private usersService: UsersService) {}
+
+  ngOnInit(): void {
+    this.getUsers();
+  }
+
+  private getUsers(): void {
+    this.users = this.usersService.listUser();
+  }
+
 }

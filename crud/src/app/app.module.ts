@@ -15,7 +15,9 @@ import { MatCardModule } from '@angular/material/card';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 const material = [
   MatToolbarModule,
@@ -23,7 +25,9 @@ const material = [
   MatButtonModule,
   MatCardModule,
   MatDividerModule,
-  MatInputModule
+  MatInputModule,
+  MatFormFieldModule,
+  MatSelectModule
 ]
 
 @NgModule({
