@@ -10,6 +10,7 @@ const routes: Routes = [
     path: 'users', component: UsersComponent,
     children: [
     { path: 'create', component: CreateUserComponent },
+    { path: 'edit/:id', component: CreateUserComponent },
     { path: '', component: ListComponent}]
   },
   // { path: 'create-user', component: CreateUserComponent },

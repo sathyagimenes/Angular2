@@ -9,6 +9,7 @@ import { States } from '../models/states.model';
 export class UsersService {
 
   users!: User[];
+  user!: User;
   constructor() { }
 
   public getStatesOfBrazil(): States[] {
@@ -62,6 +63,11 @@ export class UsersService {
 
   public listUser(): User[] {
     return this.users = JSON.parse(localStorage.getItem('USERS') || '[]');
+  }
+
+  public getUserById(userId: string): User {
+    const users = this.listUser()
+    return users.find(user => user.id === userId) as User;
   }
 
 

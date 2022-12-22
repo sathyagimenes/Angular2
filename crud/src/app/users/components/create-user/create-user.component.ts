@@ -3,7 +3,7 @@ import { User } from './../../models/user.model';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { States } from '../../models/states.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -15,12 +15,25 @@ export class CreateUserComponent {
   registerForm!: FormGroup;
   user!: User;
   public states!: States[];
+  id!: string;
+  filteredUser!: User;
 
-  constructor(private usersService: UsersService, private router: Router) {}
+  constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.buildForm();
     this.getStates();
+    this.getRouteParams();
+  }
+
+  private getRouteParams() {
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.setFormValue();
+  }
+
+  private setFormValue() {
+    this.filteredUser = this.usersService.getUserById(this.id);
+    this.registerForm.patchValue(this.filteredUser);
   }
 
   private buildForm(): void {
