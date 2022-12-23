@@ -17,7 +17,7 @@ export class CreateUserComponent {
   public states!: States[];
   public id!: string;
 
-  constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -32,8 +32,7 @@ export class CreateUserComponent {
 
   private setFormValue() {
     const filteredUser = this.usersService.getUserById(this.id);
-    if (filteredUser != null)
-    {
+    if (filteredUser != null) {
       this.registerForm.get('documentNumber')?.disable();
       const submitBtn = window.document.getElementsByName('submitBtn');
       submitBtn.item(0).innerText = 'Editar';
@@ -41,7 +40,6 @@ export class CreateUserComponent {
       titulo.item(0).innerText = 'Edição de cadastro';
     }
     this.registerForm.patchValue(filteredUser);
-    console.log(filteredUser)
   }
 
   private buildForm(): void {
@@ -64,7 +62,7 @@ export class CreateUserComponent {
       contact: new FormGroup({
         phone: new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('^[0-9]*$')]),
         email: new FormControl(null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ]),
+        ]),
       })
     });
   }
@@ -82,7 +80,6 @@ export class CreateUserComponent {
     else {
       this.usersService.saveUser(this.user);
     }
-    console.log(this.user)
     this.registerForm.reset();
     this.router.navigate(['/users']);
   }

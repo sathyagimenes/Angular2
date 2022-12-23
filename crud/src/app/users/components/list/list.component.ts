@@ -20,8 +20,6 @@ export class ListComponent implements OnInit {
 
   private getUsers(): void {
     this.users = this.usersService.listUser();
-    console.log(this.users)
-
   }
 
   public editUser(id: string): void {
