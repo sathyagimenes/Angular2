@@ -8,11 +8,11 @@ import { User } from '../../models/user.model';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit{
+export class ListComponent implements OnInit {
 
   public users!: User[];
 
-  constructor(private usersService: UsersService, private router: Router) {}
+  constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -20,10 +20,17 @@ export class ListComponent implements OnInit{
 
   private getUsers(): void {
     this.users = this.usersService.listUser();
+    console.log(this.users)
+
   }
 
-  public editUser(id: string): void{
-    this.router.navigate(['/users/edit/',id]);
+  public editUser(id: string): void {
+    this.router.navigate(['/users/edit/', id]);
+  }
+
+  public deleteUser(id: string): void {
+    this.usersService.deleteUser(id);
+    this.getUsers();
   }
 
 }

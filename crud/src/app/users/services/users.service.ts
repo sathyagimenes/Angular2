@@ -61,6 +61,24 @@ export class UsersService {
     localStorage.setItem('USERS', JSON.stringify(this.users));
   }
 
+  deleteUser(userId: string): void {
+    this.users = this.listUser();
+    const index = this.users.findIndex(user => user.id === userId);
+    if (index < 0) {
+      return
+    }
+    this.users.splice(index, 1);
+    localStorage.setItem('USERS', JSON.stringify(this.users));
+  }
+
+
+  public updateUser(newUser: User): void {
+    const users = this.listUser()
+    const filteredUser = users.find(user => user.id === newUser.id) as User
+    this.deleteUser(filteredUser.id);
+    this.saveUser(newUser);
+  }
+
   public listUser(): User[] {
     return this.users = JSON.parse(localStorage.getItem('USERS') || '[]');
   }
@@ -69,6 +87,4 @@ export class UsersService {
     const users = this.listUser()
     return users.find(user => user.id === userId) as User;
   }
-
-
 }

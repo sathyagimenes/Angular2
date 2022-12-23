@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
       id: crypto.randomUUID(),
       name: 'Amaral da Fonseca',
       profession: 'Analista de Sistemas',
-      birthDate: '04/15/1988',
+      birthDate: '1988-04-15',
       documentNumber: '01234567890',
       address: {
         id: crypto.randomUUID(),
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
       id: crypto.randomUUID(),
       name: 'Murilo Moreira',
       profession: 'Operador de Empilhadeira',
-      birthDate: '08/19/2001',
+      birthDate: '2001-08-19',
       documentNumber: '44222902071',
       address: {
         id: crypto.randomUUID(),

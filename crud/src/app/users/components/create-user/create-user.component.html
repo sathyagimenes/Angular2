@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row my-4">
-    <h1 style="text-align: center" class="fs-1 my-5">Cadastro de usuário</h1>
-    <form class="example-form justify-content-center align-items-center d-flex row" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h1 style="text-align: center" name="titulo" class="fs-1 my-5">Cadastro de usuário</h1>
+    <form class="form justify-content-center align-items-center d-flex row" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <table class="m-1 w-100" cellspacing="0"><tr>
         <td><mat-form-field class="m-1 w-100">
           <mat-label>Nome e Sobrenome</mat-label>
@@ -98,7 +98,7 @@
           *ngIf="registerForm.get('contact.phone')?.errors && registerForm.get('contact.phone')?.touched">O campo celular deve conter 11 digitos</mat-error>
         </mat-form-field></td>
       </tr></table>
-      <button mat-raised-button color="primary" type="submit" class="w-25 fs-4 my-3 p-4" [disabled]="!registerForm.valid">Cadastrar</button>
+      <button mat-raised-button color="primary" type="submit" name="submitBtn" class="w-25 fs-4 my-3 p-4" [disabled]="!registerForm.valid">Cadastrar</button>
     </form>
   </div>
 </div>

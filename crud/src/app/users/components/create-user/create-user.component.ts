@@ -12,11 +12,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class CreateUserComponent {
 
-  registerForm!: FormGroup;
-  user!: User;
+  public registerForm!: FormGroup;
+  public user!: User;
   public states!: States[];
-  id!: string;
-  filteredUser!: User;
+  public id!: string;
 
   constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
@@ -32,8 +31,17 @@ export class CreateUserComponent {
   }
 
   private setFormValue() {
-    this.filteredUser = this.usersService.getUserById(this.id);
-    this.registerForm.patchValue(this.filteredUser);
+    const filteredUser = this.usersService.getUserById(this.id);
+    if (filteredUser != null)
+    {
+      this.registerForm.get('documentNumber')?.disable();
+      const submitBtn = window.document.getElementsByName('submitBtn');
+      submitBtn.item(0).innerText = 'Editar';
+      const titulo = window.document.getElementsByName('titulo');
+      titulo.item(0).innerText = 'Edição de cadastro';
+    }
+    this.registerForm.patchValue(filteredUser);
+    console.log(filteredUser)
   }
 
   private buildForm(): void {
@@ -65,9 +73,16 @@ export class CreateUserComponent {
     this.states = this.usersService.getStatesOfBrazil();
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     this.user = this.registerForm.getRawValue();
-    this.usersService.saveUser(this.user);
+    const filteredUser = this.usersService.getUserById(this.id);
+    if (filteredUser != null) {
+      this.usersService.updateUser(this.user);
+    }
+    else {
+      this.usersService.saveUser(this.user);
+    }
+    console.log(this.user)
     this.registerForm.reset();
     this.router.navigate(['/users']);
   }
