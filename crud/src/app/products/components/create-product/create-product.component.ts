@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../models/product.model';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-create-product',
@@ -12,7 +14,7 @@ export class CreateProductComponent {
   public product!: Product;
   public id!: string;
 
-  // constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private productService: ProductService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -48,15 +50,15 @@ export class CreateProductComponent {
 
   public onSubmit(): void {
     this.product = this.form.getRawValue();
-    // const filteredUser = this.usersService.getUserById(this.id);
-    // if (filteredUser != null) {
-    //   this.usersService.updateUser(this.user);
-    // }
-    // else {
-      // this.usersService.saveUser(this.user);
-    // }
+    const filteredProduct = this.productService.getProductById(this.id);
+    if (filteredProduct != null) {
+      this.productService.updateProduct(this.product);
+    }
+    else {
+      this.productService.saveProduct(this.product);
+    }
     this.form.reset();
-    // this.router.navigate(['/users']);
+    this.router.navigate(['/products']);
   }
 
 
