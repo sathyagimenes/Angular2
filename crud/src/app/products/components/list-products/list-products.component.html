@@ -2,6 +2,7 @@
   <div class="row my-4">
     <div class="col-4" *ngFor="let product of products">
       <mat-card class="example-card">
+        <img src="{{product.image}}">
         <mat-card-header>
           <mat-card-title>{{product.name}}</mat-card-title>
         </mat-card-header>

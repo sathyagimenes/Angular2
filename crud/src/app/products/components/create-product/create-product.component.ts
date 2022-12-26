@@ -18,25 +18,24 @@ export class CreateProductComponent {
 
   ngOnInit(): void {
     this.buildForm();
-    // this.getRouteParams();
+    this.getRouteParams();
   }
 
-  // private getRouteParams() {
-  //   this.id = this.activatedRoute.snapshot.params['id'];
-  //   this.setFormValue();
-  // }
+  private getRouteParams() {
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.setFormValue();
+  }
 
-  // private setFormValue() {
-  //   const filteredUser = this.usersService.getUserById(this.id);
-  //   if (filteredUser != null) {
-  //     this.form.get('documentNumber')?.disable();
-  //     const submitBtn = window.document.getElementsByName('submitBtn');
-  //     submitBtn.item(0).innerText = 'Editar';
-  //     const titulo = window.document.getElementsByName('titulo');
-  //     titulo.item(0).innerText = 'Edição de cadastro';
-  //   }
-  //   this.form.patchValue(filteredUser);
-  // }
+  private setFormValue() {
+    const filteredProduct = this.productService.getProductById(this.id);
+    if (filteredProduct != null) {
+      const submitBtn = window.document.getElementsByName('submitBtn');
+      submitBtn.item(0).innerText = 'Editar';
+      const titulo = window.document.getElementsByName('titulo');
+      titulo.item(0).innerText = 'Edição de produto';
+    }
+    this.form.patchValue(filteredProduct);
+  }
 
   private buildForm(): void {
     this.form = new FormGroup({
@@ -44,7 +43,8 @@ export class CreateProductComponent {
       name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       description: new FormControl(null, [Validators.required]),
       expirationDate: new FormControl(null, [Validators.required]),
-      price: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+,[0-9]{2}')])
+      price: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+,[0-9]{2}')]),
+      image: new FormControl(null)
     });
   }
 

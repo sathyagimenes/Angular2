@@ -14,6 +14,12 @@ export class ProductService {
       ...product,
       id: crypto.randomUUID()
     }
+    if (product.image === null || product.image == '')
+    {
+      product = {
+        ...product,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'
+    }}
     const products = this.listProduct()
     products.push(product);
     localStorage.setItem('PRODUCTS', JSON.stringify(this.products));
