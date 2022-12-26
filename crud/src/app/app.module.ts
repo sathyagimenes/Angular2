@@ -8,7 +8,7 @@ import { CreateUserComponent } from './users/components/create-user/create-user.
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { NotFoundComponent } from './users/components/not-found/not-found.component';
+import { NotFoundComponent } from './common/components/not-found/not-found.component';
 import { ListComponent } from './users/components/list/list.component';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
@@ -17,6 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { CreateProductComponent } from './products/components/create-product/create-product.component';
+import { ListProductsComponent } from './products/components/list-products/list-products.component';
+import { ProductsComponent } from './products/products.component';
 // import { formatDate } from "@angular/common";
 // import { registerLocaleData } from '@angular/common';
 // import localeES from "@angular/common/locales/es";
@@ -40,7 +43,10 @@ const material = [
     UsersComponent,
     CreateUserComponent,
     NotFoundComponent,
-    ListComponent
+    ListComponent,
+    CreateProductComponent,
+    ListProductsComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,7 @@ const material = [
     material,
     ReactiveFormsModule
   ],
-  providers: [ provideNgxMask() ],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
