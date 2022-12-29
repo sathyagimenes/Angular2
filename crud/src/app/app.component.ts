@@ -1,3 +1,4 @@
+import { Product } from './products/models/product.model';
 import { Component, OnInit } from '@angular/core';
 import { User } from './users/models/user.model';
 
@@ -53,7 +54,27 @@ export class AppComponent implements OnInit {
     }
   ];
 
+  public products: Product[] = [
+    {
+      id: crypto.randomUUID(),
+      name: 'Cookies',
+      description: 'Cookies de chocolate da vovó',
+      expirationDate: '2023-04-15',
+      price: '15,50',
+      image: 'https://img.itdg.com.br/images/recipes/000/094/434/332855/332855_original.jpg'
+    },
+    {
+      id: crypto.randomUUID(),
+      name: 'Batata frita',
+      description: 'Batatinhas fritas crocantes',
+      expirationDate: '2023-01-24',
+      price: '22,99',
+      image: 'https://img.itdg.com.br/tdg/images/recipes/000/018/897/164773/164773_original.jpg?w=1200'
+    }
+  ];
+
   ngOnInit(): void {
     localStorage.setItem('USERS', JSON.stringify(this.users));
+    localStorage.setItem('PRODUCTS', JSON.stringify(this.products));
   }
 }

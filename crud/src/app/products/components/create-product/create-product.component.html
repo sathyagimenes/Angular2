@@ -1,48 +1,48 @@
-<div class="container mt-4">
+<div class="container mt-4" style="min-width: 550px;">
   <div class="row my-4">
   <h1 style="text-align: center" name="titulo" class="fs-1 my-5">Cadastro de produtos</h1>
   <form [formGroup]="form" (ngSubmit)="onSubmit()"
-    class="justify-content-center align-items-center d-flex row  m-1 w-100">
+    class="justify-content-center align-items-center d-flex row m-0 w-100">
     <fieldset class="m-1 w-100">
       <div class="m-1 w-100">
-        <div class="m-1 w-100">
-          <mat-form-field class="m-1 w-100">
+        <div class="m-0 w-100">
+          <mat-form-field class="m-0 w-100">
             <mat-label>Nome do produto</mat-label>
             <input formControlName="name" matInput />
             <mat-error>O campo nome deve conter ao menos 3 caracteres</mat-error>
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field class="m-1 w-100">
+          <mat-form-field class="m-0 w-100">
             <mat-label>Descrição do produto</mat-label>
             <textarea formControlName="description" matInput></textarea>
             <mat-error>O campo descrição é obrigatório</mat-error>
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field class="m-1 w-100">
+          <mat-form-field class="m-0 w-100">
             <mat-label>Validade</mat-label>
             <input type="date" formControlName="expirationDate" matInput />
             <mat-error>O campo validade é obrigatório</mat-error>
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field class="m-1 w-100">
+          <mat-form-field class="m-0 w-100">
             <mat-label>Preço</mat-label>
             <input formControlName="price" matInput placeholder="10,00"/>
             <mat-error>O campo preço é obrigatório</mat-error>
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field class="m-1 w-100">
+          <mat-form-field class="m-0 w-100">
             <mat-label>Link da imagem</mat-label>
             <input formControlName="image" matInput/>
           </mat-form-field>
         </div>
       </div>
     </fieldset>
-    <div class="mt-3">
-      <button type="submit" name="submitBtn" mat-flat-button color="primary" [disabled]="form.invalid">Salvar
+    <div class="mt-3 d-flex justify-content-center">
+      <button type="submit" name="submitBtn" mat-flat-button color="primary" [disabled]="form.invalid">Cadastrar
       </button>
     </div>
   </form>
