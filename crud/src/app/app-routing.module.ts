@@ -24,7 +24,6 @@ const routes: Routes = [
       { path: 'edit/:id', component: CreateProductComponent },
       { path: '', component: ListProductsComponent }]
   },
-  // { path: 'create-user', component: CreateUserComponent },
   {
     path: '', redirectTo: 'users', pathMatch: 'full'
   },

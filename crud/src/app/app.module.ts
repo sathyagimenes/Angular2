@@ -20,11 +20,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { CreateProductComponent } from './products/components/create-product/create-product.component';
 import { ListProductsComponent } from './products/components/list-products/list-products.component';
 import { ProductsComponent } from './products/products.component';
-// import { formatDate } from "@angular/common";
-// import { registerLocaleData } from '@angular/common';
-// import localeES from "@angular/common/locales/es";
-// registerLocaleData(localeES, "pt-br");
-
 
 const material = [
   MatToolbarModule,
