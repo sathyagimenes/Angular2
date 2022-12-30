@@ -2,7 +2,7 @@
   <div style="min-width: 350px;" class="my-4 flex-lg-row d-flex flex-wrap flex-column justify-content-center align-items-center" >
     <div class="col-4 m-1" style="min-width: 350px;" *ngFor="let product of products">
       <mat-card class="card w-100 m-1" style="border-radius: 4%">
-        <img src="{{ product.image }}" style="border-radius: 4%" width="auto" height="310">
+        <img src="{{ product.image }}" style="border-radius: 4%" width="auto" height="280">
         <mat-card-header>
           <mat-card-title>{{ product.name }}</mat-card-title>
         </mat-card-header>
@@ -20,7 +20,9 @@
         </mat-card-content>
         <mat-card-actions class="d-flex justify-content-end">
           <button mat-icon-button color="primary" (click)="editProduct(product.id)"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button color="warn" (click)="deleteProduct(product.id)"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="openDialog('700ms', '200ms', product)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

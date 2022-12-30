@@ -20,6 +20,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { CreateProductComponent } from './products/components/create-product/create-product.component';
 import { ListProductsComponent } from './products/components/list-products/list-products.component';
 import { ProductsComponent } from './products/products.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './common/components/dialog/dialog.component';
+
 
 const material = [
   MatToolbarModule,
@@ -29,7 +32,8 @@ const material = [
   MatDividerModule,
   MatInputModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule
 ]
 
 @NgModule({
@@ -41,7 +45,8 @@ const material = [
     ListComponent,
     CreateProductComponent,
     ListProductsComponent,
-    ProductsComponent
+    ProductsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
