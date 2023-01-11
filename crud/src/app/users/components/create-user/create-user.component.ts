@@ -31,15 +31,28 @@ export class CreateUserComponent {
   }
 
   private setFormValue() {
-    const filteredUser = this.usersService.getUserById(this.id);
-    if (filteredUser != null) {
-      this.registerForm.get('documentNumber')?.disable();
-      const submitBtn = window.document.getElementsByName('submitBtn');
-      submitBtn.item(0).innerText = 'Editar';
-      const titulo = window.document.getElementsByName('titulo');
-      titulo.item(0).innerText = 'Edição de cadastro';
-    }
-    this.registerForm.patchValue(filteredUser);
+    // const filteredUser = this.usersService.getUserById(this.id);
+    // const user = this.usersService.getUserById(this.userId);
+    this.usersService.getUserById(this.id)
+      .subscribe({
+        next: (users: User) => {
+          if (users) {
+            this.user = users;
+            this.registerForm.get('documentNumber')?.disable();
+            const submitBtn = window.document.getElementsByName('submitBtn');
+            submitBtn.item(0).innerText = 'Editar';
+            const titulo = window.document.getElementsByName('titulo');
+            titulo.item(0).innerText = 'Edição de cadastro';
+          }
+          this.registerForm.patchValue(this.user);
+        },
+        error: (error: any) => {
+          console.log(error)
+        },
+        complete: () => {
+          console.log('Finalizado!')
+        }
+      });
   }
 
   private buildForm(): void {
@@ -73,7 +86,7 @@ export class CreateUserComponent {
 
   public onSubmit(): void {
     this.user = this.registerForm.getRawValue();
-    const filteredUser = this.usersService.getUserById(this.id);
+    const filteredUser = this.usersService.findUser(this.id);
     if (filteredUser != null) {
       this.usersService.updateUser(this.user);
     }

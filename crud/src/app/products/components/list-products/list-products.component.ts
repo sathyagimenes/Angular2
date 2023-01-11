@@ -4,13 +4,17 @@ import { Router } from '@angular/router';
 import { DialogComponent } from 'src/app/common/components/dialog/dialog.component';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
+import { takeUntil, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.css']
 })
-export class ListProductsComponent implements OnInit{
+export class ListProductsComponent implements OnInit {
+
+  private unsubscribe = new Subject();
+
   public products!: Product[];
 
   constructor(private productsService: ProductService, private router: Router, private dialog: MatDialog) { }
@@ -20,7 +24,22 @@ export class ListProductsComponent implements OnInit{
   }
 
   private getProducts(): void {
-    this.products = this.productsService.listProduct();
+    // this.products = this.productsService.listProduct();
+    this.productsService.getProducts()
+      .pipe(
+        takeUntil(this.unsubscribe)
+      )
+      .subscribe({
+        next: (products: Product[]) => {
+          this.products = products;
+        },
+        error: (error: any) => {
+          console.log('Error message:', error)
+        },
+        complete: () => {
+          console.log('Finalizado!')
+        }
+      });
   }
 
   public editProduct(id: string): void {

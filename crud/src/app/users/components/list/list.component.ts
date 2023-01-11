@@ -4,6 +4,7 @@ import { UsersService } from './../../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { DialogComponent } from 'src/app/common/components/dialog/dialog.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -11,6 +12,8 @@ import { DialogComponent } from 'src/app/common/components/dialog/dialog.compone
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+
+  private unsubscribe = new Subject();
 
   public users!: User[];
 
@@ -21,7 +24,22 @@ export class ListComponent implements OnInit {
   }
 
   private getUsers(): void {
-    this.users = this.usersService.listUser();
+    // this.users = this.usersService.listUser();
+    this.usersService.getUsers()
+      .pipe(
+        takeUntil(this.unsubscribe)
+      )
+      .subscribe({
+        next: (users: User[]) => {
+          this.users = users;
+        },
+        error: (error: any) => {
+          console.log('Error message:', error)
+        },
+        complete: () => {
+          console.log('Finalizado!')
+        }
+      });
   }
 
   public editUser(id: string): void {

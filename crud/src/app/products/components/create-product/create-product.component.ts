@@ -27,14 +27,32 @@ export class CreateProductComponent {
   }
 
   private setFormValue() {
-    const filteredProduct = this.productService.getProductById(this.id);
-    if (filteredProduct != null) {
-      const submitBtn = window.document.getElementsByName('submitBtn');
-      submitBtn.item(0).innerText = 'Editar';
-      const titulo = window.document.getElementsByName('titulo');
-      titulo.item(0).innerText = 'Edição de produto';
-    }
-    this.form.patchValue(filteredProduct);
+    // const filteredProduct = this.productService.getProductById(this.id);
+    // if (filteredProduct != null) {
+    //   const submitBtn = window.document.getElementsByName('submitBtn');
+    //   submitBtn.item(0).innerText = 'Editar';
+    //   const titulo = window.document.getElementsByName('titulo');
+    //   titulo.item(0).innerText = 'Edição de produto';
+    // }
+    // this.form.patchValue(filteredProduct);
+    this.productService.getProductById(this.id)
+      .subscribe({
+        next: (products: Product) => {
+          if (products) {
+            const submitBtn = window.document.getElementsByName('submitBtn');
+            submitBtn.item(0).innerText = 'Editar';
+            const titulo = window.document.getElementsByName('titulo');
+            titulo.item(0).innerText = 'Edição de produto';
+          }
+          this.form.patchValue(products);
+        },
+        error: (error: any) => {
+          console.log(error)
+        },
+        complete: () => {
+          console.log('Finalizado!')
+        }
+      });
   }
 
   private buildForm(): void {
@@ -50,7 +68,7 @@ export class CreateProductComponent {
 
   public onSubmit(): void {
     this.product = this.form.getRawValue();
-    const filteredProduct = this.productService.getProductById(this.id);
+    const filteredProduct = this.productService.findProduct(this.id);
     if (filteredProduct != null) {
       this.productService.updateProduct(this.product);
     }
@@ -60,6 +78,5 @@ export class CreateProductComponent {
     this.form.reset();
     this.router.navigate(['/products']);
   }
-
 
 }

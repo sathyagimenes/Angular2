@@ -2,6 +2,7 @@ import { User } from './../models/user.model';
 
 import { Injectable } from '@angular/core';
 import { States } from '../models/states.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,11 @@ export class UsersService {
     );
   }
 
+  public getUsers(): Observable<any> {
+    const users = this.listUser()
+    return of(users);
+  }
+
   public saveUser(user: User): void {
     user = {
       ...user,
@@ -83,7 +89,13 @@ export class UsersService {
     return this.users = JSON.parse(localStorage.getItem('USERS') || '[]');
   }
 
-  public getUserById(userId: string): User {
+  public getUserById(userId: string): Observable<User> {
+    const users = this.listUser()
+    // return users.find(user => user.id === userId) as User;
+    return of(users.find(user => user.id === userId) as User);
+  }
+
+  public findUser(userId: string): User {
     const users = this.listUser()
     return users.find(user => user.id === userId) as User;
   }
